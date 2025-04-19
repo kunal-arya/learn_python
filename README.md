@@ -2,3 +2,6 @@
 
 ## Basics: Syntax, variables, operators
 ### url - https://docs.python.org/3/tutorial/introduction.html
+
+## Control Flow: if, for, while
+### url - https://docs.python.org/3/tutorial/controlflow.html
