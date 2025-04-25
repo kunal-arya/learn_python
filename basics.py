@@ -136,7 +136,7 @@ print(cubes)
 # will be seen through all other variables that refer to it.
 rgb = ["Red", "Green", "Blue"]
 rgba = rgb
-id(rgb) == id(rgba)  # they reference the same object
+print(id(rgb), id(rgba),id(rgb) == id(rgba))  # they reference the same object
 # True
 rgba.append("Alph")
 print(rgb)
@@ -180,3 +180,7 @@ print(x[0])
 
 print(x[0][1])
 # 'b'
+
+# reverse your list using slice method
+alphabets = ["A","E","I","O","U"]
+print(alphabets[::-1])

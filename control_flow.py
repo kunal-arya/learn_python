@@ -271,6 +271,22 @@ a, b = b, a + b   # updates both a and b in one line (used in Fibonacci)
 # ✅ All variables inside a function are local by default
 #     → can't reassign outer/global vars unless using `global` or `nonlocal`
 # global x / nonlocal y (used in closures)
+x = 10  # global variable
+
+def change_x():
+    x = 5  # this creates a *local* variable x, doesn't affect global x
+    print("Inside change_x:", x)
+
+def change_global_x():
+    global x
+    x = 20  # this *modifies* the global x
+    print("Inside change_global_x:", x)
+
+change_x()
+print("After change_x:", x)          # still prints 10 (global x is unchanged)
+
+change_global_x()
+print("After change_global_x:", x)   # prints 20 (global x is changed)
 
 # ✅ Functions return `None` by default (like `undefined` in JS, but explicit)
 def do_nothing():
@@ -289,13 +305,42 @@ f()  # → "Hello"
 # ✅ No function overloading — last defined wins
 # Can use default arguments or *args to handle multiple cases
 
+# ✅ Python doesn't support function overloading — only the last function definition is used
+
+# ❌ Only the last definition is kept
+def greet(name):
+    print(f"Hello, {name}!")
+
+def greet(name, time_of_day):
+    print(f"Good {time_of_day}, {name}!")
+
+greet("Alice", "morning")   # ✅ Works
+# greet("Alice")            # ❌ TypeError: missing 1 required argument
+
+
+# ✅ Use default arguments to handle multiple cases
+def greet(name, time_of_day="day"):
+    print(f"Good {time_of_day}, {name}!")
+
+greet("Bob")                 # → Good day, Bob!
+greet("Charlie", "evening") # → Good evening, Charlie!
+
+
+# ✅ Use *args to accept variable number of arguments
+def add(*numbers):
+    total = sum(numbers)
+    print("Sum is:", total)
+
+add(2, 3)                    # → Sum is: 5
+add(1, 2, 3, 4)              # → Sum is: 10
+
 # ✅ Python uses "call by object reference"
 # Mutable args (like lists) can be changed inside the function
 
 
 # ✅ Keyword Args (Python has native support)
 def func(a, b=2): pass
-func(b=3, a=1)  # Allowed
+func(b=4,a=3)  # Allowed
 # JS: simulate with obj → func({ a: 1, b: 3 })
 
 
@@ -371,13 +416,22 @@ demo("apple", 1, 2, 3, color="red", size="L")
 def func(a, /, b, *, c):
     print(a, b, c)
 
-# Meaning:
-# a → positional-only (must pass by position)
-# b → either positional or keyword
-# c → keyword-only (must use c=...)
+# 📌 Meaning:
+# - Parameters **before `/`** → must be passed *positionally*
+# - Parameters **after `*`** → must be passed *as keywords*
+# - Parameters **between `/` and `*`** → can be *positional or keyword*
 
-# ✅ func(1, 2, c=3)
-# ❌ func(a=1, b=2, c=3) → a must be positional
-# ❌ func(1, 2, 3) → c must be keyword
+# ✅ Valid calls:
+func(1, 2, c=3)
+func(1, b=2, c=3)
 
-# JS: No equivalent — JS doesn't enforce how args are passed
+# ❌ Invalid calls:
+# func(a=1, b=2, c=3) → ❌ 'a' must be positional (it's before `/`)
+# func(1, 2, 3)       → ❌ 'c' must be keyword-only (it's after `*`)
+
+# 🧠 Tip:
+# - `/` → everything *before* it is positional-only
+# - `*` → everything *after* it is keyword-only
+
+# 🛑 JS comparison:
+# JavaScript has no equivalent — it doesn’t enforce how arguments are passed
