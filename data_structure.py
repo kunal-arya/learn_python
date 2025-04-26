@@ -169,3 +169,117 @@ sym_diff = a ^ b        # In a or b but not both: {'r', 'd', 'b', 'm', 'z', 'l'}
 filtered_set = {x for x in 'abracadabra' if x not in 'abc'}  # Creates {'r', 'd'}
 # JS equivalent:
 # const filteredSet = new Set('abracadabra'.split('').filter(x => !['a','b','c'].includes(x)));
+
+# Python Dictionaries
+# ------------------
+
+# Creating a dictionary with initial key-value pairs
+tel = {'jack': 4098, 'sape': 4139}
+# JS equivalent: const tel = {'jack': 4098, 'sape': 4139}; // JS objects are similar to Python dictionaries
+
+# Adding a new key-value pair
+tel['guido'] = 4127  # Adds 'guido': 4127 to the dictionary
+# JS equivalent: tel['guido'] = 4127; // Same syntax in JS
+
+# Accessing values by key
+jack_number = tel['jack']  # Returns 4098
+# JS equivalent: const jackNumber = tel['jack']; // Same syntax in JS
+
+# Deleting a key-value pair
+del tel['sape']  # Removes the 'sape' entry
+# JS equivalent: delete tel['sape']; // Similar but uses delete operator in JS
+
+# Getting all keys as a list (in insertion order)
+keys_list = list(tel)  # Returns ['jack', 'guido', 'irv']
+# JS equivalent: const keysList = Object.keys(tel); // Similar function in JS
+
+# Getting sorted keys
+sorted_keys = sorted(tel)  # Returns keys in alphabetical order
+# JS equivalent: const sortedKeys = Object.keys(tel).sort();
+
+# Checking if a key exists
+'guido' in tel  # Returns True
+# JS equivalent: 'guido' in tel; // Same syntax in JS
+# Or more commonly: tel.hasOwnProperty('guido');
+
+'jack' not in tel  # Returns False
+# JS equivalent: !('jack' in tel); // Need to negate in JS
+
+# Creating dictionaries using dict() constructor
+contact_dict = dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+# JS equivalent: const contactDict = Object.fromEntries([['sape', 4139], ['guido', 4127], ['jack', 4098]]);
+
+# Dictionary comprehension
+square_dict = {x: x**2 for x in (2, 4, 6)}  # Creates {2: 4, 4: 16, 6: 36}
+# JS equivalent: const squareDict = Object.fromEntries([2, 4, 6].map(x => [x, x**2]));
+
+# Creating dictionaries with keyword arguments (only for string keys)
+contact_dict = dict(sape=4139, guido=4127, jack=4098)
+# JS equivalent: const contactDict = {sape: 4139, guido: 4127, jack: 4098};
+
+
+# Python Looping Techniques
+# ------------------------
+
+# Looping through dictionary keys and values with items()
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.items():
+    print(k, v)
+# JS equivalent:
+# Object.entries(knights).forEach(([k, v]) => {
+#     console.log(k, v);
+# });
+
+# Loop with index position using enumerate()
+for i, v in enumerate(['tic', 'tac', 'toe']):
+    print(i, v)  # 0 tic, 1 tac, 2 toe
+# JS equivalent:
+# ['tic', 'tac', 'toe'].forEach((v, i) => {
+#     console.log(i, v);
+# });
+
+# Looping over multiple sequences with zip()
+questions = ['name', 'quest', 'favorite color']
+answers = ['lancelot', 'the holy grail', 'blue']
+for q, a in zip(questions, answers):
+    print(f'What is your {q}? It is {a}.')
+# JS equivalent:
+# questions.forEach((q, i) => {
+#     const a = answers[i];
+#     console.log(`What is your ${q}? It is ${a}.`);
+# });
+
+# Looping in reverse order
+for i in reversed(range(1, 10, 2)):
+    print(i)  # Prints 9, 7, 5, 3, 1
+# JS equivalent:
+# [...Array(5)].map((_, i) => 1 + i*2).reverse().forEach(i => {
+#     console.log(i);
+# });
+
+# Looping over sorted sequence
+basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+for i in sorted(basket):
+    print(i)  # Prints items in alphabetical order
+# JS equivalent:
+# [...basket].sort().forEach(i => {
+#     console.log(i);
+# });
+
+# Looping over unique items in sorted order
+for f in sorted(set(basket)):
+    print(f)  # Prints unique items in alphabetical order
+# JS equivalent:
+# [...new Set(basket)].sort().forEach(f => {
+#     console.log(f);
+# });
+
+# Creating a new list while filtering items (safer than modifying while iterating)
+import math
+raw_data = [56.2, float('NaN'), 51.7, 55.3, 52.5, float('NaN'), 47.8]
+filtered_data = []
+for value in raw_data:
+    if not math.isnan(value):
+        filtered_data.append(value)
+# JS equivalent:
+# const filteredData = rawData.filter(value => !Number.isNaN(value));
