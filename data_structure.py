@@ -80,3 +80,92 @@ transposed_alt = list(zip(*matrix))  # Transpose using zip and unpacking - Elega
 # 4. Python has the 'del' statement for deletion
 # 5. Python has more specialized data structures in standard library (like deque)
 # 6. Python slicing is more powerful with step parameter: fruits[0:5:2]
+
+# Python Tuples
+# ------------
+
+# Creating tuples - comma-separated values with optional parentheses
+t = 12345, 54321, 'hello!'  # Tuple packing
+# Same as: t = (12345, 54321, 'hello!')
+# JS equivalent: const t = [12345, 54321, 'hello!']; // JS uses arrays, no direct tuple equivalent
+
+# Accessing tuple elements works like lists
+first_element = t[0]  # Returns 12345
+# JS equivalent: const firstElement = t[0]; // Same syntax in JS
+
+# Tuples can be nested
+nested_tuple = t, (1, 2, 3, 4, 5)  # Creates ((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
+# JS equivalent: const nestedArray = [t, [1, 2, 3, 4, 5]]; // Nested arrays in JS
+
+# Tuples are immutable - this would cause an error:
+# t[0] = 88888  # TypeError: 'tuple' object does not support item assignment
+# JS difference: JS arrays are mutable, so this would work: t[0] = 88888;
+# JS immutable alternative: const t = Object.freeze([12345, 54321, 'hello!']);
+
+# Tuples can contain mutable objects
+tuple_with_lists = ([1, 2, 3], [3, 2, 1])  # The lists inside can be modified
+# JS equivalent: const arrayWithArrays = [[1, 2, 3], [3, 2, 1]];
+
+# Special cases for tuples
+empty_tuple = ()  # Empty tuple
+# JS equivalent: const emptyArray = [];
+
+singleton_tuple = 'hello',  # Single element tuple MUST have trailing comma
+# JS equivalent: const singletonArray = ['hello']; // No special syntax needed in JS
+
+# Tuple unpacking - assigning tuple values to variables
+x, y, z = t  # x gets 12345, y gets 54321, z gets 'hello!'
+# JS equivalent: const [x, y, z] = t; // Destructuring assignment in JS
+
+# Python Sets
+# ----------
+
+# Creating sets - uses curly braces
+fruits = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}  # Duplicates are removed
+# JS equivalent: const fruits = new Set(['apple', 'orange', 'apple', 'pear', 'orange', 'banana']);
+
+# Empty set must use set() constructor, not {}
+empty_set = set()  # {} would create an empty dictionary
+# JS equivalent: const emptySet = new Set();
+
+# Fast membership testing
+'orange' in fruits  # Returns True
+# JS equivalent: fruits.has('orange'); // Returns true
+
+'kiwi' in fruits    # Returns False
+# JS equivalent: fruits.has('kiwi'); // Returns false
+
+# Set operations
+a = set('abracadabra')  # Creates {'a', 'r', 'b', 'c', 'd'}
+# JS equivalent: const a = new Set('abracadabra'.split(''));
+
+b = set('alacazam')     # Creates {'a', 'l', 'c', 'z', 'm'}
+# JS equivalent: const b = new Set('alacazam'.split(''));
+
+# Python set operations have no direct equivalents in JS Set
+# You need custom functions or use library like lodash
+
+# Difference (elements in a but not in b)
+difference = a - b      # Elements in a but not in b: {'r', 'd', 'b'}
+# JS equivalent:
+# const difference = new Set([...a].filter(x => !b.has(x)));
+
+# Union (elements in either a or b)
+union = a | b           # Elements in either a or b: {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
+# JS equivalent:
+# const union = new Set([...a, ...b]);
+
+# Intersection (elements in both a and b)
+intersection = a & b    # Elements in both a and b: {'a', 'c'}
+# JS equivalent:
+# const intersection = new Set([...a].filter(x => b.has(x)));
+
+# Symmetric difference (in a or b but not both)
+sym_diff = a ^ b        # In a or b but not both: {'r', 'd', 'b', 'm', 'z', 'l'}
+# JS equivalent:
+# const symDiff = new Set([...a].filter(x => !b.has(x)).concat([...b].filter(x => !a.has(x))));
+
+# Set comprehension
+filtered_set = {x for x in 'abracadabra' if x not in 'abc'}  # Creates {'r', 'd'}
+# JS equivalent:
+# const filteredSet = new Set('abracadabra'.split('').filter(x => !['a','b','c'].includes(x)));

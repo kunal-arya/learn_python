@@ -6,5 +6,5 @@
 ## Control Flow: if, for, while
 ### url - https://docs.python.org/3/tutorial/controlflow.html
 
-## Data Structures
+## Data Structures: List, Tuples, Sets, Dictionaries, Looping Techniques
 ### url - https://docs.python.org/3/tutorial/datastructures.html
