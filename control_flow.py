@@ -355,6 +355,19 @@ func(**kwargs)
 add = lambda x, y: x + y
 # JS: (x, y) => x + y
 
+# ✅ Python lambda vs JS arrow function
+# Python: one-liner only — expressions only, no statements
+add = lambda x, y: x + y
+
+# JavaScript: supports multi-line and full logic
+# const add = (x, y) => {
+#     const result = x + y;
+#     return result;
+# }
+
+# 🧠 Rule: Python lambda = short & sweet, for simple expressions only
+# Use `def` for anything more than one-liners
+
 # ✅ Docstrings = Triple quotes
 def foo():
     # \"\"\"This explains the function\"\"\"

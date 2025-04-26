@@ -5,3 +5,6 @@
 
 ## Control Flow: if, for, while
 ### url - https://docs.python.org/3/tutorial/controlflow.html
+
+## Data Structures
+### url - https://docs.python.org/3/tutorial/datastructures.html
