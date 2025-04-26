@@ -84,6 +84,33 @@ transposed_alt = list(zip(*matrix))  # Transpose using zip and unpacking - Elega
 # Python Tuples
 # ------------
 
+# ✅ Tuple = Immutable, ordered collection
+# - Similar to JS arrays but **cannot be modified**
+# - Items can be of different types (int, str, etc.)
+# - Defined using parentheses () or just commas
+
+# Examples:
+t1 = (1, 2, 3)           # Normal tuple
+t2 = 1, 2, 3             # Also a tuple — commas define it!
+t3 = ("a", 3.14, True)   # Mixed types
+t4 = (42,)               # ✅ Single-element tuple — must use comma
+
+# ❌ Immutable:
+# t1[0] = 100   → TypeError: 'tuple' object does not support item assignment
+
+# ✅ You can:
+# - Access by index → t1[1] → 2
+# - Iterate → for x in t1
+# - Nest tuples → ((1, 2), (3, 4))
+
+# 🧠 Use when:
+# - You want a fixed collection of items
+# - You want to use it as a dict key or set element (requires immutability)
+
+# 🔁 JS comparison:
+# - Closest match is an array, but with `Object.freeze()` (kinda)
+# - Tuples = lightweight, immutable data containers
+
 # Creating tuples - comma-separated values with optional parentheses
 t = 12345, 54321, 'hello!'  # Tuple packing
 # Same as: t = (12345, 54321, 'hello!')
@@ -283,3 +310,168 @@ for value in raw_data:
         filtered_data.append(value)
 # JS equivalent:
 # const filteredData = rawData.filter(value => !Number.isNaN(value));
+
+# Python Conditions
+# ----------------
+
+# Comparison operators in conditions
+x = 5
+y = 10
+if x < y:  # Less than
+    print("x is less than y")
+# JS equivalent: if (x < y) { console.log("x is less than y"); }
+
+# Membership operators
+fruits = ['apple', 'banana', 'orange']
+if 'apple' in fruits:  # Checks if 'apple' is in the list
+    print("Found apple")
+# JS equivalent: if (fruits.includes('apple')) { console.log("Found apple"); }
+
+if 'grape' not in fruits:  # Checks if 'grape' is not in the list
+    print("No grapes")
+# JS equivalent: if (!fruits.includes('grape')) { console.log("No grapes"); }
+
+# Identity operators
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+if a is c:  # Checks if a and c are the same object (they are)
+    print("a and c are the same object")
+# JS equivalent: if (a === c) { console.log("a and c are the same object"); }
+
+if a is not b:  # Checks if a and b are different objects (they are)
+    print("a and b are different objects")
+# JS equivalent: if (a !== b) { console.log("a and b are different objects"); }
+
+# Chained comparisons
+n = 5
+if 1 < n < 10:  # Checks if n is between 1 and 10
+    print("n is between 1 and 10")
+# JS equivalent: if (1 < n && n < 10) { console.log("n is between 1 and 10"); }
+
+# Boolean operators with short-circuit evaluation
+x = 5
+y = 0
+if x > 0 and y > 0:  # y > 0 is evaluated only if x > 0 is True
+    print("Both x and y are positive")
+# JS equivalent: if (x > 0 && y > 0) { console.log("Both x and y are positive"); }
+
+if x > 0 or y > 0:  # y > 0 is not evaluated if x > 0 is True
+    print("At least one of x or y is positive")
+# JS equivalent: if (x > 0 || y > 0) { console.log("At least one of x or y is positive"); }
+
+# Assigning Boolean results to variables
+string1, string2, string3 = '', 'Trondheim', 'Hammer Dance'
+non_null = string1 or string2 or string3  # Returns first non-empty string
+# JS equivalent: const nonNull = string1 || string2 || string3;
+
+# The walrus operator := (Python 3.8+) for assignment in expressions
+# No direct JS equivalent, but similar to combining assignment with evaluation
+numbers = [1, 2, 3, 4, 5]
+if (n := len(numbers)) > 3:  # Assigns n = 5, then checks if n > 3
+    print(f"List has {n} items")
+# JS equivalent: const n = numbers.length; if (n > 3) { console.log(`List has ${n} items`); }
+
+
+# Comparing Sequences and Other Types
+# ----------------------------------
+
+# Lexicographical comparison of sequences
+tuple1 = (1, 2, 3)
+tuple2 = (1, 2, 4)
+if tuple1 < tuple2:  # Compares items one by one until a difference is found
+    print("tuple1 is less than tuple2")
+# JS equivalent: 
+# // No direct equivalent, would need custom comparison function
+# if (JSON.stringify(tuple1) < JSON.stringify(tuple2)) { console.log("tuple1 is less than tuple2"); }
+
+
+# ✅ String comparison in Python (lexicographic, Unicode-based)
+if 'ABC' < 'Python':
+    print("ABC comes before Python")  # ✅ Printed
+
+# 📌 Why?
+# - Python compares strings using Unicode code points
+# - Comparison is done character by character
+# - 'A' = 65, 'P' = 80 → so 'A' < 'P' → 'ABC' < 'Python' is True
+# 🧠 Mnemonic: Like dictionary order — stops at first difference
+
+# 🔁 JS equivalent:
+# if ('ABC' < 'Python') {
+#     console.log("ABC comes before Python");
+# }
+
+# ✅ Tuple (and sequence) comparison in Python
+
+# 🧠 Rule 1: Python compares sequences **element by element**, from left to right
+# - Like dictionary order
+# - Comparison stops at the first difference
+
+
+# 🔸 Comparing sequences of different lengths
+
+if (1, 2) < (1, 2, -1):
+    print("(1, 2) is less than (1, 2, -1)")  # ✅ True
+
+# 📌 Explanation:
+# - Python sees: 1 == 1 → continue
+# - Then: 2 == 2 → continue
+# - Now: first tuple ends, second tuple still has more → first is smaller
+# - Just like in a dictionary, "cat" < "cater"
+
+# 🧠 Think of it like this:
+# - A shorter tuple that’s a **prefix** of a longer one is considered smaller
+
+# 🔁 JS equivalent:
+# // JS doesn’t compare arrays like this — you'd need to write a custom function:
+# function compareTuples(a, b) { ... }
+
+# 🔸 Comparing sequences with nested structures
+
+if (1, 2, ('aa', 'ab')) < (1, 2, ('abc', 'a'), 4):
+    print("First tuple is less than second tuple")  # ✅ True
+
+# 📌 Explanation:
+# - 1 == 1 → continue
+# - 2 == 2 → continue
+# - ('aa', 'ab') < ('abc', 'a') → this is true
+#   → because 'aa' < 'abc' (string comparison)
+# - Since this part differs, Python doesn’t even check the trailing 4
+
+# 🧠 Tuples are compared **recursively**, element-by-element, including inner tuples
+
+# 🔁 JS equivalent:
+# // No built-in way to compare nested arrays/tuples — must write custom logic
+
+# 🔸 Mixed numeric type comparison
+
+if 1 == 1.0:
+    print("1 equals 1.0")  # ✅ True
+
+# 📌 Explanation:
+# - Python considers int and float as numeric types → compares by value
+# - 1 == 1.0 → True
+
+# 🔁 JS equivalent:
+# if (1 === 1.0) { console.log("1 equals 1.0"); }  // ✅ Also true in JS
+# JS auto-converts between number types during comparison
+
+# 🔸 Comparing completely different types
+
+# list1 = [1, 2]
+# dict1 = {'a': 1}
+# if list1 < dict1:  # ❌ Raises TypeError in Python
+#     print("This will cause an error")
+
+# 📌 Explanation:
+# - Python doesn’t allow comparison between incompatible types like list vs dict
+# - Raises a TypeError: '<' not supported between instances of 'list' and 'dict'
+
+# 🔁 JS equivalent:
+# // JS converts both to strings → doesn't raise error, but gives nonsense
+# console.log([1, 2] < { a: 1 });  // → true or false depending on weird coercion
+
+# 🧠 Summary:
+# Python = strict → TypeError on bad comparisons
+# JS = loose → weird coercions, may lead to bugs

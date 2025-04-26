@@ -144,7 +144,7 @@ print(rgb)
 
 ############################
 ########### Copy       Type	  Outer Object	 Inner Objects (Nested)	   Shared?
-########### Shallow    Copy	  New	         Same references	       Yes
+########### Shallow    Copy	  New	         Same references	   Yes
 ########### Deep       Copy	  New	         New recursive copies	   No
 ############################
 
